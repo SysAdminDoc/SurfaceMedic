@@ -1,0 +1,64 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Cool daylight surfaces matching the dark theme's elevation model -->
+    <SolidColorBrush x:Key="WindowBrush" Color="#F3F7FB" />
+    <SolidColorBrush x:Key="SidebarBrush" Color="#EAF1F8" />
+    <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="SurfaceRaisedBrush" Color="#F9FBFE" />
+    <SolidColorBrush x:Key="SurfaceSunkenBrush" Color="#E8EFF6" />
+    <SolidColorBrush x:Key="SurfaceHoverBrush" Color="#E7F2FC" />
+    <SolidColorBrush x:Key="SurfacePressedBrush" Color="#D8E9F8" />
+    <SolidColorBrush x:Key="OverlayBrush" Color="#990B1724" />
+    <SolidColorBrush x:Key="ShadowBrush" Color="#28091A2B" />
+
+    <!-- Structure -->
+    <SolidColorBrush x:Key="BorderBrush" Color="#CFDBE7" />
+    <SolidColorBrush x:Key="BorderStrongBrush" Color="#A7BACD" />
+    <SolidColorBrush x:Key="ControlBorderBrush" Color="#7A91A7" />
+    <SolidColorBrush x:Key="ControlBorderStrongBrush" Color="#5F7891" />
+    <SolidColorBrush x:Key="SeparatorBrush" Color="#D8E2EC" />
+
+    <!-- Typography -->
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#142235" />
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#42566D" />
+    <SolidColorBrush x:Key="TextMutedBrush" Color="#586C82" />
+    <SolidColorBrush x:Key="TextInverseBrush" Color="#F6FAFE" />
+
+    <!-- One interaction accent -->
+    <SolidColorBrush x:Key="AccentBrush" Color="#006CAA" />
+    <SolidColorBrush x:Key="AccentHoverBrush" Color="#005C92" />
+    <SolidColorBrush x:Key="AccentPressedBrush" Color="#004A76" />
+    <SolidColorBrush x:Key="AccentSoftBrush" Color="#DCEFFC" />
+    <SolidColorBrush x:Key="AccentForegroundBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="FocusRingBrush" Color="#006FB8" />
+    <SolidColorBrush x:Key="SelectionBrush" Color="#D6ECFA" />
+    <SolidColorBrush x:Key="SelectionStrongBrush" Color="#B9DFF5" />
+
+    <!-- Status colors meet contrast targets on light surfaces -->
+    <SolidColorBrush x:Key="SuccessBrush" Color="#157B39" />
+    <SolidColorBrush x:Key="SuccessSoftBrush" Color="#DDF3E4" />
+    <SolidColorBrush x:Key="WarningBrush" Color="#915A00" />
+    <SolidColorBrush x:Key="WarningSoftBrush" Color="#FFF0CB" />
+    <SolidColorBrush x:Key="DangerBrush" Color="#B1273C" />
+    <SolidColorBrush x:Key="DangerHoverBrush" Color="#991F32" />
+    <SolidColorBrush x:Key="DangerPressedBrush" Color="#801828" />
+    <SolidColorBrush x:Key="DangerSoftBrush" Color="#FBE1E5" />
+    <SolidColorBrush x:Key="DangerForegroundBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="InfoBrush" Color="#006CAA" />
+    <SolidColorBrush x:Key="InfoSoftBrush" Color="#DCEFFC" />
+
+    <!-- Disabled states remain legible without looking actionable -->
+    <SolidColorBrush x:Key="DisabledSurfaceBrush" Color="#E8EEF4" />
+    <SolidColorBrush x:Key="DisabledBorderBrush" Color="#D4DDE6" />
+    <SolidColorBrush x:Key="DisabledTextBrush" Color="#8998A8" />
+
+    <!-- The complete radius vocabulary. Do not add ad-hoc values. -->
+    <CornerRadius x:Key="CornerRadius0">0</CornerRadius>
+    <CornerRadius x:Key="CornerRadius4">4</CornerRadius>
+    <CornerRadius x:Key="CornerRadius6">6</CornerRadius>
+    <CornerRadius x:Key="CornerRadius8">8</CornerRadius>
+    <CornerRadius x:Key="CornerRadius10">10</CornerRadius>
+    <CornerRadius x:Key="CornerRadius12">12</CornerRadius>
+
+</ResourceDictionary>

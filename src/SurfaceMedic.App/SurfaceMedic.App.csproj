@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\SurfaceMedic.Core\SurfaceMedic.Core.csproj" />
+  </ItemGroup>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\..\assets\SurfaceMedic.ico</ApplicationIcon>
+    <AssemblyName>SurfaceMedic</AssemblyName>
+    <RootNamespace>SurfaceMedic.App</RootNamespace>
+  </PropertyGroup>
+</Project>

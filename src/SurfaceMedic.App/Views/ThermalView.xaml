@@ -1,0 +1,79 @@
+<UserControl x:Class="SurfaceMedic.App.Views.ThermalView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:automation="clr-namespace:System.Windows.Automation;assembly=PresentationCore">
+    <Grid Margin="24,20,24,24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Style="{StaticResource CardBorder}" Padding="18,15" Margin="0,0,0,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Width="40" Height="40" CornerRadius="8" Background="{DynamicResource AccentSoftBrush}" Margin="0,0,12,0">
+                        <TextBlock Text="&#xE7A3;" FontFamily="Segoe Fluent Icons" FontSize="21" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <StackPanel>
+                        <TextBlock Text="Thermal event history" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" />
+                        <TextBlock Text="Review firmware throttling, temperature warnings, and hardware errors from the Windows System log." Margin="0,3,0,0" Foreground="{DynamicResource TextSecondaryBrush}" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <RadioButton Content="7 days" GroupName="ThermalRange" Command="{Binding SelectThermalRangeCommand}" CommandParameter="7" Margin="0,0,6,0" />
+                    <RadioButton Content="30 days" GroupName="ThermalRange" Command="{Binding SelectThermalRangeCommand}" CommandParameter="30" IsChecked="True" Margin="0,0,6,0" />
+                    <RadioButton Content="90 days" GroupName="ThermalRange" Command="{Binding SelectThermalRangeCommand}" CommandParameter="90" Margin="0,0,14,0" />
+                    <Button Content="Scan event log" Style="{StaticResource PrimaryButton}" Command="{Binding ScanThermalCommand}" Margin="0,0,8,0" automation:AutomationProperties.Name="Scan thermal event log" />
+                    <Button Content="Export CSV" Command="{Binding ExportThermalCommand}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="{Binding ThermalSummaryTitle}" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" />
+                <TextBlock Text="{Binding ThermalSummary}" Margin="0,4,0,0" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+            <Border Grid.Column="1" Background="{DynamicResource SurfaceRaisedBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="6" Padding="10,6" VerticalAlignment="Center">
+                <TextBlock Text="{Binding ThermalEventCountText}" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" />
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="0">
+            <Grid>
+                <DataGrid ItemsSource="{Binding ThermalEvents}" SelectedItem="{Binding SelectedThermalEvent}" Visibility="{Binding ThermalEvents, Converter={StaticResource InverseEmptyCollectionVisibilityConverter}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="TIME" Binding="{Binding Timestamp, StringFormat={}{0:yyyy-MM-dd HH:mm}}" Width="150" />
+                        <DataGridTextColumn Header="LEVEL" Binding="{Binding Level}" Width="96" />
+                        <DataGridTextColumn Header="PROVIDER" Binding="{Binding Provider}" Width="210" />
+                        <DataGridTextColumn Header="ID" Binding="{Binding EventId}" Width="72" />
+                        <DataGridTextColumn Header="MESSAGE" Binding="{Binding Message}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="480" Visibility="{Binding ThermalEvents, Converter={StaticResource EmptyCollectionVisibilityConverter}}">
+                    <Border Width="56" Height="56" CornerRadius="10" Background="{DynamicResource AccentSoftBrush}" HorizontalAlignment="Center">
+                        <TextBlock Text="&#xE9D9;" FontFamily="Segoe Fluent Icons" FontSize="26" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <TextBlock Text="No event scan loaded" Margin="0,14,0,0" FontSize="17" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Choose a time range and scan the System log. Results remain local to this PC." Margin="0,6,0,0" Foreground="{DynamicResource TextSecondaryBrush}" TextAlignment="Center" TextWrapping="Wrap" />
+                    <Button Content="Scan the last 30 days" Style="{StaticResource PrimaryButton}" Command="{Binding ScanThermalCommand}" Margin="0,16,0,0" HorizontalAlignment="Center" />
+                </StackPanel>
+                <Border Background="{DynamicResource SurfaceBrush}" Opacity="0.88" Visibility="{Binding IsThermalLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ProgressBar Width="180" Height="4" IsIndeterminate="True" />
+                        <TextBlock Text="Reading the Windows event log..." Margin="0,12,0,0" Foreground="{DynamicResource TextSecondaryBrush}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

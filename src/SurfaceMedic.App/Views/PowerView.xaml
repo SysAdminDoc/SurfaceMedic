@@ -1,0 +1,111 @@
+<UserControl x:Class="SurfaceMedic.App.Views.PowerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:automation="clr-namespace:System.Windows.Automation;assembly=PresentationCore">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="24,20,24,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="16" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Border Style="{StaticResource CardBorder}" MinHeight="252">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="38" Height="38" CornerRadius="8" Background="{DynamicResource AccentSoftBrush}" Margin="0,0,11,0">
+                                <TextBlock Text="&#xE950;" FontFamily="Segoe Fluent Icons" FontSize="20" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Processor ceiling" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" />
+                                <TextBlock Text="Turbo Boost control" Foreground="{DynamicResource TextMutedBrush}" FontSize="12" />
+                            </StackPanel>
+                        </StackPanel>
+                        <Border Grid.Column="1" Background="{DynamicResource InfoSoftBrush}" CornerRadius="6" Padding="9,5" VerticalAlignment="Top">
+                            <TextBlock Text="{Binding CpuModeLabel}" Foreground="{DynamicResource InfoBrush}" FontSize="12" FontWeight="SemiBold" />
+                        </Border>
+                    </Grid>
+                    <TextBlock Grid.Row="1" Text="{Binding CpuStatusText}" Margin="0,18,0,12" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" />
+                    <Grid Grid.Row="2" Margin="0,0,0,14">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="24" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBlock Text="PLUGGED IN" Style="{StaticResource CaptionText}" /><TextBlock Grid.Column="1" Text="{Binding CpuAcLabel}" Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="SemiBold" /></Grid>
+                            <ProgressBar Value="{Binding CpuAcPercent, Mode=OneWay}" Maximum="100" Height="5" Margin="0,7,0,0" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBlock Text="ON BATTERY" Style="{StaticResource CaptionText}" /><TextBlock Grid.Column="1" Text="{Binding CpuDcLabel}" Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="SemiBold" /></Grid>
+                            <ProgressBar Value="{Binding CpuDcPercent, Mode=OneWay}" Maximum="100" Height="5" Margin="0,7,0,0" />
+                        </StackPanel>
+                    </Grid>
+                    <TextBlock Grid.Row="3" Text="A 99% ceiling disables Turbo Boost and can lower sustained temperatures on thermally limited hardware." Foreground="{DynamicResource TextMutedBrush}" FontSize="12" TextWrapping="Wrap" />
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,18,0,0">
+                        <Button Content="Run cooler at 99%" Style="{StaticResource PrimaryButton}" Command="{Binding SetCpuCapCommand}" CommandParameter="99" Margin="0,0,8,0" automation:AutomationProperties.Name="Set processor ceiling to 99 percent" />
+                        <Button Content="Restore 100%" Command="{Binding SetCpuCapCommand}" CommandParameter="100" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource CardBorder}" MinHeight="252">
+                <Grid>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="38" Height="38" CornerRadius="8" Background="{DynamicResource AccentSoftBrush}" Margin="0,0,11,0">
+                            <TextBlock Text="&#xE945;" FontFamily="Segoe Fluent Icons" FontSize="20" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="Windows power mode" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" />
+                            <TextBlock Text="{Binding PowerModeText}" Foreground="{DynamicResource TextMutedBrush}" FontSize="12" />
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBlock Grid.Row="1" Text="Choose a daily operating profile. Best efficiency is recommended when heat or fan noise limits sustained performance." Margin="0,18,0,14" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" />
+                    <StackPanel Grid.Row="2">
+                        <RadioButton Content="Best power efficiency" GroupName="PowerMode" Command="{Binding SetPowerModeCommand}" CommandParameter="BestPowerEfficiency" Margin="0,0,0,7" />
+                        <RadioButton Content="Balanced" GroupName="PowerMode" Command="{Binding SetPowerModeCommand}" CommandParameter="Balanced" Margin="0,0,0,7" IsChecked="True" />
+                        <RadioButton Content="Best performance" GroupName="PowerMode" Command="{Binding SetPowerModeCommand}" CommandParameter="BestPerformance" />
+                    </StackPanel>
+                    <Button Grid.Row="3" Content="Refresh power status" Command="{Binding RefreshPowerCommand}" HorizontalAlignment="Left" Margin="0,18,0,0" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="2" Style="{StaticResource CardBorder}" MinHeight="188">
+                <Grid>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="38" Height="38" CornerRadius="8" Background="{DynamicResource SuccessSoftBrush}" Margin="0,0,11,0">
+                            <TextBlock Text="&#xE850;" FontFamily="Segoe Fluent Icons" FontSize="20" Foreground="{DynamicResource SuccessBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel VerticalAlignment="Center"><TextBlock Text="Battery report" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" /><TextBlock Text="Capacity, cycles, and usage history" Foreground="{DynamicResource TextMutedBrush}" FontSize="12" /></StackPanel>
+                    </StackPanel>
+                    <TextBlock Grid.Row="1" Text="Generate the native Windows battery report on your Desktop. It can reveal wear patterns or a failing battery that contributes to heat." Margin="0,16,0,14" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" />
+                    <Button Grid.Row="2" Content="Generate battery report" Style="{StaticResource PrimaryButton}" Command="{Binding GenerateBatteryReportCommand}" HorizontalAlignment="Left" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource CardBorder}" MinHeight="188">
+                <Grid>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="38" Height="38" CornerRadius="8" Background="{DynamicResource AccentSoftBrush}" Margin="0,0,11,0"><TextBlock Text="&#xE945;" FontFamily="Segoe Fluent Icons" FontSize="20" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+                        <StackPanel VerticalAlignment="Center"><TextBlock Text="Active power plan" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" /><TextBlock Text="Windows power scheme" Foreground="{DynamicResource TextMutedBrush}" FontSize="12" /></StackPanel>
+                    </StackPanel>
+                    <TextBlock Grid.Row="1" Text="{Binding ActivePowerPlan}" Margin="0,18,0,0" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Text="Power modes layer on top of this plan. SurfaceMedic changes only the controls shown here and leaves other advanced settings intact." Margin="0,10,0,0" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" />
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

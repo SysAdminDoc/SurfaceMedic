@@ -1,0 +1,19 @@
+<Application x:Class="SurfaceMedic.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:infra="clr-namespace:SurfaceMedic.App.Infrastructure">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/DarkTheme.xaml" />
+                <ResourceDictionary Source="Themes/Controls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <infra:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <infra:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+            <infra:PageVisibilityConverter x:Key="PageVisibilityConverter" />
+            <infra:EmptyCollectionVisibilityConverter x:Key="EmptyCollectionVisibilityConverter" />
+            <infra:InverseEmptyCollectionVisibilityConverter x:Key="InverseEmptyCollectionVisibilityConverter" />
+            <infra:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

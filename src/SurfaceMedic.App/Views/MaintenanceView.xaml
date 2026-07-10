@@ -1,0 +1,62 @@
+<UserControl x:Class="SurfaceMedic.App.Views.MaintenanceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:automation="clr-namespace:System.Windows.Automation;assembly=PresentationCore">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="24,20,24,24">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="16" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+            <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="16" /><RowDefinition Height="Auto" /><RowDefinition Height="16" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+
+            <Border Style="{StaticResource CardBorder}" MinHeight="196">
+                <Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal"><Border Width="38" Height="38" CornerRadius="8" Background="{DynamicResource AccentSoftBrush}" Margin="0,0,11,0"><TextBlock Text="&#xE74D;" FontFamily="Segoe Fluent Icons" FontSize="19" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border><StackPanel VerticalAlignment="Center"><TextBlock Text="Temporary files" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" /><TextBlock Text="Recover storage space" FontSize="12" Foreground="{DynamicResource TextMutedBrush}" /></StackPanel></StackPanel>
+                    <TextBlock Grid.Row="1" Text="Clear user and Windows temporary folders. Files currently in use are skipped automatically, and freed space is reported in the activity log." Margin="0,16,0,14" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" />
+                    <Button Grid.Row="2" Content="Clean temporary files" Style="{StaticResource PrimaryButton}" Command="{Binding RunMaintenanceCommand}" CommandParameter="CleanTemporaryFiles" HorizontalAlignment="Left" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource CardBorder}" MinHeight="196">
+                <Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal"><Border Width="38" Height="38" CornerRadius="8" Background="{DynamicResource SuccessSoftBrush}" Margin="0,0,11,0"><TextBlock Text="&#xE73E;" FontFamily="Segoe Fluent Icons" FontSize="19" Foreground="{DynamicResource SuccessBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border><StackPanel VerticalAlignment="Center"><TextBlock Text="System file integrity" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" /><TextBlock Text="DISM and SFC repair sequence" FontSize="12" Foreground="{DynamicResource TextMutedBrush}" /></StackPanel></StackPanel>
+                    <TextBlock Grid.Row="1" Text="Scan the component store first. Repair it only when corruption is found, then verify protected Windows files with SFC." Margin="0,16,0,14" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" />
+                    <WrapPanel Grid.Row="2">
+                        <Button Content="Scan health" Command="{Binding RunMaintenanceCommand}" CommandParameter="ScanComponentStore" Margin="0,0,8,8" />
+                        <Button Content="Repair health" Command="{Binding RunMaintenanceCommand}" CommandParameter="RepairComponentStore" Margin="0,0,8,8" />
+                        <Button Content="Run SFC" Style="{StaticResource PrimaryButton}" Command="{Binding RunMaintenanceCommand}" CommandParameter="SystemFileCheck" Margin="0,0,0,8" />
+                    </WrapPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="2" Style="{StaticResource CardBorder}" MinHeight="188">
+                <Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal"><Border Width="38" Height="38" CornerRadius="8" Background="{DynamicResource InfoSoftBrush}" Margin="0,0,11,0"><TextBlock Text="&#xE895;" FontFamily="Segoe Fluent Icons" FontSize="19" Foreground="{DynamicResource InfoBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border><StackPanel VerticalAlignment="Center"><TextBlock Text="Component store" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" /><TextBlock Text="Windows servicing cleanup" FontSize="12" Foreground="{DynamicResource TextMutedBrush}" /></StackPanel></StackPanel>
+                    <TextBlock Grid.Row="1" Text="Remove superseded update components from WinSxS. This can recover several gigabytes on long-lived Windows installations." Margin="0,16,0,14" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" />
+                    <Button Grid.Row="2" Content="Clean component store" Command="{Binding RunMaintenanceCommand}" CommandParameter="CleanupComponentStore" HorizontalAlignment="Left" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource CardBorder}" MinHeight="188">
+                <Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal"><Border Width="38" Height="38" CornerRadius="8" Background="{DynamicResource AccentSoftBrush}" Margin="0,0,11,0"><TextBlock Text="&#xE895;" FontFamily="Segoe Fluent Icons" FontSize="19" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border><StackPanel VerticalAlignment="Center"><TextBlock Text="Updates and firmware" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" /><TextBlock Text="Surface drivers and diagnostics" FontSize="12" Foreground="{DynamicResource TextMutedBrush}" /></StackPanel></StackPanel>
+                    <TextBlock Grid.Row="1" Text="Surface thermal tables and fan behavior ship through Windows Update. Check optional updates, then use the Surface app for hardware diagnostics." Margin="0,16,0,14" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" />
+                    <StackPanel Grid.Row="2" Orientation="Horizontal"><Button Content="Open Windows Update" Style="{StaticResource PrimaryButton}" Command="{Binding OpenWindowsUpdateCommand}" Margin="0,0,8,0" /><Button Content="Get the Surface app" Command="{Binding OpenSurfaceAppCommand}" /></StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="4" Style="{StaticResource CardBorder}" MinHeight="178">
+                <Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal"><Border Width="38" Height="38" CornerRadius="8" Background="{DynamicResource AccentSoftBrush}" Margin="0,0,11,0"><TextBlock Text="&#xE774;" FontFamily="Segoe Fluent Icons" FontSize="19" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border><StackPanel VerticalAlignment="Center"><TextBlock Text="Network resolver" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" /><TextBlock Text="Refresh local DNS state" FontSize="12" Foreground="{DynamicResource TextMutedBrush}" /></StackPanel></StackPanel>
+                    <TextBlock Grid.Row="1" Text="Flush the Windows DNS resolver cache to clear stale lookups. This is safe and can resolve intermittent name-resolution issues." Margin="0,16,0,14" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" />
+                    <Button Grid.Row="2" Content="Flush DNS cache" Command="{Binding RunMaintenanceCommand}" CommandParameter="FlushDns" HorizontalAlignment="Left" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="4" Grid.Column="2" Style="{StaticResource CardBorder}" MinHeight="178" BorderBrush="{DynamicResource WarningBrush}">
+                <Grid><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal"><Border Width="38" Height="38" CornerRadius="8" Background="{DynamicResource SurfaceRaisedBrush}" Margin="0,0,11,0"><TextBlock Text="&#xE90F;" FontFamily="Segoe Fluent Icons" FontSize="19" Foreground="{DynamicResource WarningBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border><StackPanel VerticalAlignment="Center"><TextBlock Text="Physical care" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" /><TextBlock Text="Manual inspection recommended" FontSize="12" Foreground="{DynamicResource WarningBrush}" /></StackPanel></StackPanel>
+                    <TextBlock Grid.Row="1" Text="Power off before clearing vents with short bursts of compressed air. Keep the kickstand open under load, use a hard surface, and replace a swollen or heavily worn battery promptly." Margin="0,16,0,0" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" />
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
