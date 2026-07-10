@@ -1,5 +1,5 @@
 <#
-    SurfaceMedic v0.1.0
+    SurfaceMedic v0.2.0
     Tune-up and thermal toolkit for heavily-used Surface (and other Windows) devices.
 
     Features:
@@ -23,7 +23,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $script:AppName    = 'SurfaceMedic'
-$script:AppVersion = '0.1.0'
+$script:AppVersion = '0.2.0'
 
 # ------------------------------------------------------------------ elevation
 $identity  = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -72,7 +72,7 @@ public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int at
 $xaml = @'
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SurfaceMedic v0.1.0" Width="1240" Height="820" MinWidth="1020" MinHeight="660"
+        Title="SurfaceMedic v0.2.0" Width="1240" Height="820" MinWidth="1020" MinHeight="660"
         WindowStartupLocation="CenterScreen" Background="#1E1E2E"
         FontFamily="Segoe UI" FontSize="13" Foreground="#CDD6F4">
   <Window.Resources>
@@ -321,7 +321,7 @@ $xaml = @'
           <StackPanel Orientation="Horizontal">
             <TextBlock Text="SurfaceMedic" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextBr}"/>
             <Border Background="{StaticResource Surf0}" CornerRadius="6" Padding="8,2" Margin="10,2,0,0" VerticalAlignment="Center">
-              <TextBlock Text="v0.1.0" FontSize="11" Foreground="{StaticResource Sub}"/>
+              <TextBlock Text="v0.2.0" FontSize="11" Foreground="{StaticResource Sub}"/>
             </Border>
           </StackPanel>
           <TextBlock Text="Surface tune-up and thermal toolkit" FontSize="12" Foreground="{StaticResource Sub}" Margin="0,2,0,0"/>
@@ -619,7 +619,7 @@ $xaml = @'
     <!-- status bar -->
     <Border Grid.Row="4" Background="{StaticResource Mantle}" Padding="14,6">
       <DockPanel>
-        <TextBlock x:Name="TxtVer" DockPanel.Dock="Right" FontSize="11" Foreground="{StaticResource Sub}" Text="SurfaceMedic v0.1.0"/>
+        <TextBlock x:Name="TxtVer" DockPanel.Dock="Right" FontSize="11" Foreground="{StaticResource Sub}" Text="SurfaceMedic v0.2.0"/>
         <TextBlock x:Name="TxtStatus" FontSize="11" Foreground="{StaticResource Sub}" Text="Ready"/>
       </DockPanel>
     </Border>
