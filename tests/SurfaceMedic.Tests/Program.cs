@@ -1,3 +1,6 @@
+using System.Globalization;
+using System.Windows;
+using SurfaceMedic.App.Infrastructure;
 using SurfaceMedic.Core.Models;
 using SurfaceMedic.Core.Services;
 
@@ -10,7 +13,8 @@ var tests = new (string Name, Action Run)[]
     ("storage health boundaries", TestStorageHealthBoundaries),
     ("thermal health priority", TestThermalHealthPriority),
     ("disk health telemetry", TestDiskHealthTelemetry),
-    ("power health modes", TestPowerHealthModes)
+    ("power health modes", TestPowerHealthModes),
+    ("collection count visibility", TestCollectionCountVisibility)
 };
 
 var failures = 0;
@@ -141,6 +145,17 @@ static void TestPowerHealthModes()
     Equal(HealthState.Healthy, HealthAssessor.AssessPower(99, 99).State);
     Equal(HealthState.Advisory, HealthAssessor.AssessPower(99, 100).State);
     Equal(HealthState.Advisory, HealthAssessor.AssessPower(100, 100).State);
+}
+
+static void TestCollectionCountVisibility()
+{
+    var empty = new CountToVisibilityConverter { ShowWhenEmpty = true };
+    var populated = new CountToVisibilityConverter { ShowWhenEmpty = false };
+
+    Equal(Visibility.Visible, (Visibility)empty.Convert(0, typeof(Visibility), null!, CultureInfo.InvariantCulture));
+    Equal(Visibility.Collapsed, (Visibility)empty.Convert(3, typeof(Visibility), null!, CultureInfo.InvariantCulture));
+    Equal(Visibility.Collapsed, (Visibility)populated.Convert(0, typeof(Visibility), null!, CultureInfo.InvariantCulture));
+    Equal(Visibility.Visible, (Visibility)populated.Convert(3, typeof(Visibility), null!, CultureInfo.InvariantCulture));
 }
 
 static async Task TestLiveReadOnlyAdaptersAsync()

@@ -11,8 +11,8 @@
             <infra:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <infra:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
             <infra:PageVisibilityConverter x:Key="PageVisibilityConverter" />
-            <infra:EmptyCollectionVisibilityConverter x:Key="EmptyCollectionVisibilityConverter" />
-            <infra:InverseEmptyCollectionVisibilityConverter x:Key="InverseEmptyCollectionVisibilityConverter" />
+            <infra:CountToVisibilityConverter x:Key="EmptyCountToVisibilityConverter" ShowWhenEmpty="True" />
+            <infra:CountToVisibilityConverter x:Key="PopulatedCountToVisibilityConverter" ShowWhenEmpty="False" />
             <infra:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter" />
         </ResourceDictionary>
     </Application.Resources>

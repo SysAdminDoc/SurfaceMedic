@@ -50,7 +50,7 @@
 
         <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="0">
             <Grid>
-                <DataGrid ItemsSource="{Binding ThermalEvents}" SelectedItem="{Binding SelectedThermalEvent}" Visibility="{Binding ThermalEvents, Converter={StaticResource InverseEmptyCollectionVisibilityConverter}}">
+                <DataGrid ItemsSource="{Binding ThermalEvents}" SelectedItem="{Binding SelectedThermalEvent}" Visibility="{Binding ThermalEvents.Count, Converter={StaticResource PopulatedCountToVisibilityConverter}}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="TIME" Binding="{Binding Timestamp, StringFormat={}{0:yyyy-MM-dd HH:mm}}" Width="150" />
                         <DataGridTextColumn Header="LEVEL" Binding="{Binding Level}" Width="96" />
@@ -59,7 +59,7 @@
                         <DataGridTextColumn Header="MESSAGE" Binding="{Binding Message}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="480" Visibility="{Binding ThermalEvents, Converter={StaticResource EmptyCollectionVisibilityConverter}}">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="480" Visibility="{Binding ThermalEvents.Count, Converter={StaticResource EmptyCountToVisibilityConverter}}">
                     <Border Width="56" Height="56" CornerRadius="10" Background="{DynamicResource AccentSoftBrush}" HorizontalAlignment="Center">
                         <TextBlock Text="&#xE9D9;" FontFamily="Segoe Fluent Icons" FontSize="26" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>

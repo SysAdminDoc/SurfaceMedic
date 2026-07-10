@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -34,19 +33,16 @@ public sealed class PageVisibilityConverter : IValueConverter
         Binding.DoNothing;
 }
 
-public sealed class EmptyCollectionVisibilityConverter : IValueConverter
+public sealed class CountToVisibilityConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
-        value is null || value is ICollection { Count: 0 } ? Visibility.Visible : Visibility.Collapsed;
+    public bool ShowWhenEmpty { get; set; }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
-        Binding.DoNothing;
-}
-
-public sealed class InverseEmptyCollectionVisibilityConverter : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
-        value is null || value is ICollection { Count: 0 } ? Visibility.Collapsed : Visibility.Visible;
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        var count = value is int integer ? integer : 0;
+        var visible = ShowWhenEmpty ? count == 0 : count > 0;
+        return visible ? Visibility.Visible : Visibility.Collapsed;
+    }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
         Binding.DoNothing;
