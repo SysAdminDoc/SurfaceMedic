@@ -98,14 +98,18 @@ public partial class MainWindow : Window
         Directory.CreateDirectory(screenshotDirectory);
 
         await CapturePageAsync(AppPage.Overview, Path.Combine(screenshotDirectory, "app.png"), "Dark");
+        _viewModel.PrepareThermalCaptureState();
         await CapturePageAsync(AppPage.Thermal, Path.Combine(screenshotDirectory, "thermal.png"), "Dark");
+        _viewModel.ResetThermalCaptureState();
         await CapturePageAsync(AppPage.Power, Path.Combine(screenshotDirectory, "power.png"), "Dark");
         await CapturePageAsync(AppPage.Software, Path.Combine(screenshotDirectory, "software.png"), "Dark");
         await CapturePageAsync(AppPage.Maintenance, Path.Combine(screenshotDirectory, "maintenance.png"), "Dark");
         await CapturePageAsync(AppPage.Settings, Path.Combine(screenshotDirectory, "settings.png"), "Dark");
         await CapturePageAsync(AppPage.About, Path.Combine(screenshotDirectory, "about.png"), "Dark");
         await CapturePageAsync(AppPage.Overview, Path.Combine(screenshotDirectory, "app-light.png"), "Light");
+        _viewModel.PrepareThermalCaptureState();
         await CapturePageAsync(AppPage.Thermal, Path.Combine(screenshotDirectory, "thermal-light.png"), "Light");
+        _viewModel.ResetThermalCaptureState();
         await CapturePageAsync(AppPage.Power, Path.Combine(screenshotDirectory, "power-light.png"), "Light");
         await CapturePageAsync(AppPage.Software, Path.Combine(screenshotDirectory, "software-light.png"), "Light");
         await CapturePageAsync(AppPage.Maintenance, Path.Combine(screenshotDirectory, "maintenance-light.png"), "Light");

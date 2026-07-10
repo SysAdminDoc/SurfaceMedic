@@ -130,7 +130,7 @@ public sealed class MainViewModel : ObservableObject
     public ObservableCollection<PackageRecord> Packages { get; } = [];
     public ObservableCollection<PackageRecord> PackageUpdates { get; } = [];
 
-    public string VersionLabel { get; } = $"v{Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "0.2.0"}";
+    public string VersionLabel { get; } = $"v{Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "0.2.1"}";
     public bool IsAdministrator { get; }
     public string PrivilegeLabel => IsAdministrator ? "Administrator" : "Limited access";
     public string LogsDirectory => AppPaths.LogsDirectory;
@@ -351,6 +351,40 @@ public sealed class MainViewModel : ObservableObject
     }
 
     public void NavigateForCapture(AppPage page) => Navigate(page);
+
+    internal void PrepareThermalCaptureState()
+    {
+        ThermalEvents.Clear();
+        ThermalEvents.Add(new ThermalEventRecord
+        {
+            Timestamp = new DateTimeOffset(2026, 7, 10, 10, 42, 0, TimeSpan.Zero),
+            Level = "Warning",
+            Provider = "Kernel-Processor-Power",
+            EventId = 37,
+            Kind = ThermalEventKind.FirmwareSpeedCap,
+            Message = "Processor performance was limited by system firmware."
+        });
+        ThermalEvents.Add(new ThermalEventRecord
+        {
+            Timestamp = new DateTimeOffset(2026, 7, 10, 10, 37, 0, TimeSpan.Zero),
+            Level = "Error",
+            Provider = "WHEA-Logger",
+            EventId = 17,
+            Kind = ThermalEventKind.HardwareError,
+            Message = "A corrected hardware error was reported."
+        });
+        ThermalSummaryTitle = "2 sample events shown";
+        ThermalSummary = "Populated-state preview for offscreen interface verification.";
+        OnPropertyChanged(nameof(ThermalEventCountText));
+    }
+
+    internal void ResetThermalCaptureState()
+    {
+        ThermalEvents.Clear();
+        ThermalSummaryTitle = "Thermal history is ready to scan";
+        ThermalSummary = "Choose a range to search the local System event log.";
+        OnPropertyChanged(nameof(ThermalEventCountText));
+    }
 
     public void ApplyThemeForCapture(string theme)
     {

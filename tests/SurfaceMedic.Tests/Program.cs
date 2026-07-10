@@ -174,7 +174,8 @@ static async Task TestLiveReadOnlyAdaptersAsync()
         throw new InvalidOperationException("Power collection did not set its timestamp.");
     }
 
-    _ = await service.ScanThermalEventsAsync(7, cancellationToken: timeout.Token);
+    var thermalEvents = await service.ScanThermalEventsAsync(7, cancellationToken: timeout.Token);
+    Console.WriteLine($"INFO live thermal scan returned {thermalEvents.Count} event(s).");
 }
 
 static string BuildRow((string Name, int Width)[] schema, params string[] values)

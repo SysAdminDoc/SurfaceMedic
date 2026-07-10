@@ -50,7 +50,7 @@
 
         <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="0">
             <Grid>
-                <DataGrid ItemsSource="{Binding ThermalEvents}" SelectedItem="{Binding SelectedThermalEvent}" Visibility="{Binding ThermalEvents.Count, Converter={StaticResource PopulatedCountToVisibilityConverter}}">
+                <DataGrid ItemsSource="{Binding ThermalEvents}" SelectedItem="{Binding SelectedThermalEvent}" AutoGenerateColumns="False" Visibility="{Binding ThermalEvents.Count, Converter={StaticResource PopulatedCountToVisibilityConverter}}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="TIME" Binding="{Binding Timestamp, StringFormat={}{0:yyyy-MM-dd HH:mm}}" Width="150" />
                         <DataGridTextColumn Header="LEVEL" Binding="{Binding Level}" Width="96" />

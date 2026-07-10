@@ -56,7 +56,7 @@
                     </Grid>
                 </Border>
                 <Grid Grid.Row="1">
-                    <DataGrid ItemsSource="{Binding Packages}" SelectedItem="{Binding SelectedPackage}" Visibility="{Binding Packages.Count, Converter={StaticResource PopulatedCountToVisibilityConverter}}">
+                    <DataGrid ItemsSource="{Binding Packages}" SelectedItem="{Binding SelectedPackage}" AutoGenerateColumns="False" Visibility="{Binding Packages.Count, Converter={StaticResource PopulatedCountToVisibilityConverter}}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="NAME" Binding="{Binding Name}" Width="*" />
                             <DataGridTextColumn Header="PACKAGE ID" Binding="{Binding Id}" Width="300" />
@@ -86,7 +86,7 @@
                     </Grid>
                 </Border>
                 <Grid Grid.Row="1">
-                    <DataGrid ItemsSource="{Binding PackageUpdates}" SelectedItem="{Binding SelectedPackageUpdate}" Visibility="{Binding PackageUpdates.Count, Converter={StaticResource PopulatedCountToVisibilityConverter}}">
+                    <DataGrid ItemsSource="{Binding PackageUpdates}" SelectedItem="{Binding SelectedPackageUpdate}" AutoGenerateColumns="False" Visibility="{Binding PackageUpdates.Count, Converter={StaticResource PopulatedCountToVisibilityConverter}}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="NAME" Binding="{Binding Name}" Width="*" />
                             <DataGridTextColumn Header="PACKAGE ID" Binding="{Binding Id}" Width="280" />

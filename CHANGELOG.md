@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.1 (2026-07-10)
+
+- Fixed Thermal Events scans reporting matches without revealing the populated results table.
+- Bound collection empty/populated states to their live item counts so the thermal, package-search, and package-update grids refresh immediately when results arrive.
+- Prevented WPF from appending duplicate auto-generated fields to the designed results columns.
+- Added a WPF regression test for both empty and populated collection visibility states.
+- Added deterministic offscreen captures of a populated thermal table for non-intrusive visual verification.
+
 ## v0.2.0 (2026-07-10)
 
 - Added a self-contained .NET 9 WPF/MVVM application while retaining the portable PowerShell edition.

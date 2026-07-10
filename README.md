@@ -1,6 +1,6 @@
 # SurfaceMedic
 
-![Version](https://img.shields.io/badge/version-0.2.0-2D9CFF)
+![Version](https://img.shields.io/badge/version-0.2.1-2D9CFF)
 ![License](https://img.shields.io/badge/license-MIT-58D66D)
 ![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-2D9CFF)
 ![.NET](https://img.shields.io/badge/.NET-9.0-512BD4)
