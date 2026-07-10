@@ -1,0 +1,12 @@
+# working notes / AI-session files (never committed)
+CLAUDE.md
+CODEX_CHANGELOG.md
+.claude/
+
+# backups & scratch
+*.bak
+*.tmp
+
+# generated at runtime
+SurfaceMedic-battery-report.html
+SurfaceMedic-events-*.csv
