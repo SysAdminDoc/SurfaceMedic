@@ -10,3 +10,13 @@ CODEX_CHANGELOG.md
 # generated at runtime
 SurfaceMedic-battery-report.html
 SurfaceMedic-events-*.csv
+
+# .NET build output and local IDE state
+**/bin/
+**/obj/
+.vs/
+artifacts/
+dist/
+TestResults/
+*.user
+*.suo
